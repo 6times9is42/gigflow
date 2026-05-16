@@ -1,3 +1,12 @@
-// Placeholder — will be populated with user type augmentation in Phase 2
-// when JWT auth middleware is implemented.
+declare global {
+  namespace Express {
+    interface Request {
+      user?: {
+        id: string;
+        role: 'admin' | 'sales';
+      };
+    }
+  }
+}
+
 export {};

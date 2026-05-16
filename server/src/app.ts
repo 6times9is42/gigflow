@@ -5,6 +5,7 @@ import morgan from 'morgan';
 import { config } from './config/env';
 import { errorHandler } from './middleware/error.middleware';
 import { AppError } from './utils/AppError';
+import routes from './routes/index';
 
 const app: Application = express();
 
@@ -26,9 +27,8 @@ app.get('/api/health', (_req: Request, res: Response) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
-// Routes — populated in later phases
-// app.use('/api/auth', authRoutes);
-// app.use('/api/leads', leadsRoutes);
+// API routes
+app.use('/api', routes);
 
 // 404 catch-all — must come after all real routes
 app.use((_req: Request, _res: Response, next: NextFunction) => {
