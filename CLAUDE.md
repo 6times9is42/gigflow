@@ -544,16 +544,16 @@ These aren't in the spec but elevate the submission:
 
 > Update after each phase. Helps you (and reviewers reading commit history) see momentum.
 
-- [ ] Phase 0 — Bootstrap
-- [ ] Phase 1 — Backend foundation
-- [ ] Phase 2 — Auth module
-- [ ] Phase 3 — Leads module
-- [ ] Phase 4 — Frontend foundation
-- [ ] Phase 5 — Leads dashboard UI
-- [ ] Phase 6 — Polish & edge cases
-- [ ] Phase 7 — Docker & deployment
-- [ ] Phase 8 — Documentation
-- [ ] Phase 9 — Final QA pass
+- [x] Phase 0 — Bootstrap
+- [x] Phase 1 — Backend foundation
+- [x] Phase 2 — Auth module
+- [x] Phase 3 — Leads module
+- [x] Phase 4 — Frontend foundation
+- [x] Phase 5 — Leads dashboard UI
+- [x] Phase 6 — Polish & edge cases
+- [x] Phase 7 — Docker & deployment
+- [x] Phase 8 — Documentation
+- [x] Phase 9 — Final QA pass
 
 ---
 
