@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import { useDebounce } from '@/hooks/useDebounce';
@@ -31,15 +31,15 @@ export default function LeadsListPage(): React.JSX.Element {
   const [isExporting, setIsExporting] = useState(false);
   const [exportError, setExportError] = useState<string | null>(null);
 
-  // Build query — use debounced search
-  const query = {
+  // Build query — use debounced search; memoized to avoid new object ref on every render
+  const query = useMemo(() => ({
     ...(debouncedSearch ? { search: debouncedSearch } : {}),
     ...(status ? { status } : {}),
     ...(source ? { source } : {}),
     sort,
     page,
     limit: 10,
-  };
+  }), [debouncedSearch, status, source, sort, page]);
 
   const { data: leads, pagination, isLoading, error, refetch } = useLeads(query);
 
@@ -123,8 +123,8 @@ export default function LeadsListPage(): React.JSX.Element {
           leads={leads}
           isLoading={isLoading}
           hasActiveFilters={hasActiveFilters}
-          onEdit={(lead) => setEditLead(lead)}
-          onDelete={(lead) => setDeleteLead(lead)}
+          onEdit={setEditLead}
+          onDelete={setDeleteLead}
           onNavigate={handleNavigate}
         />
       )}

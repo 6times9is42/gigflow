@@ -36,7 +36,7 @@ export function LeadForm({ lead, onSuccess, onClose }: LeadFormProps): React.JSX
     watch,
     setValue,
     formState: { errors, isSubmitting },
-  } = useForm<CreateLeadInput>({
+  } = useForm<CreateLeadInput | UpdateLeadInput>({
     resolver: zodResolver(isEdit ? updateLeadSchema : createLeadSchema),
     defaultValues: isEdit
       ? {

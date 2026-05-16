@@ -22,7 +22,7 @@ export function useLeads(params: LeadsQuery): UseLeadsResult {
   // Stable string representation to avoid object identity issues in deps
   const paramsKey = JSON.stringify(params);
 
-  const fetch = useCallback((): void => {
+  const fetchLeads = useCallback((): void => {
     // Cancel any in-flight request
     abortRef.current?.abort();
     const controller = new AbortController();
@@ -53,11 +53,11 @@ export function useLeads(params: LeadsQuery): UseLeadsResult {
   }, [paramsKey]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    fetch();
+    fetchLeads();
     return (): void => {
       abortRef.current?.abort();
     };
-  }, [fetch]);
+  }, [fetchLeads]);
 
-  return { data, pagination, isLoading, error, refetch: fetch };
+  return { data, pagination, isLoading, error, refetch: fetchLeads };
 }

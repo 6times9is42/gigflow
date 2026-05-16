@@ -60,6 +60,7 @@ export function LeadFilters({
           <input
             ref={searchRef}
             type="text"
+            aria-label="Search leads"
             placeholder='Search leads… (/)'
             value={filters.search}
             onChange={(e) => onFilterChange('search', e.target.value)}
@@ -83,6 +84,7 @@ export function LeadFilters({
           onChange={(v) => onFilterChange('status', v)}
           placeholder="All Statuses"
           options={STATUS_VALUES.map((s) => ({ value: s, label: s }))}
+          ariaLabel="Filter by status"
         />
 
         {/* Source filter */}
@@ -91,6 +93,7 @@ export function LeadFilters({
           onChange={(v) => onFilterChange('source', v)}
           placeholder="All Sources"
           options={SOURCE_VALUES.map((s) => ({ value: s, label: s }))}
+          ariaLabel="Filter by source"
         />
 
         {/* Sort */}
@@ -102,6 +105,7 @@ export function LeadFilters({
             { value: 'latest', label: 'Newest First' },
             { value: 'oldest', label: 'Oldest First' },
           ]}
+          ariaLabel="Sort leads"
         />
       </div>
 
@@ -137,6 +141,7 @@ interface FilterSelectProps {
   onChange: (value: string) => void;
   placeholder: string;
   options: Array<{ value: string; label: string }>;
+  ariaLabel: string;
 }
 
 function FilterSelect({
@@ -144,10 +149,12 @@ function FilterSelect({
   onChange,
   placeholder,
   options,
+  ariaLabel,
 }: FilterSelectProps): React.JSX.Element {
   return (
     <div className="relative">
       <select
+        aria-label={ariaLabel}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         className={cn(
