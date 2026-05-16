@@ -23,7 +23,7 @@ export async function registerUser(input: RegisterInput): Promise<AuthResult> {
     name: input.name,
     email: input.email,
     password: input.password,
-    role: input.role ?? 'sales',
+    role: 'sales',
   });
 
   const token = signToken({ id: String(user._id), role: user.role });

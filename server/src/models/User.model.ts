@@ -67,7 +67,5 @@ userSchema.methods.comparePassword = async function (plain: string): Promise<boo
   return bcrypt.compare(plain, this.password as string);
 };
 
-// Unique index on email
-userSchema.index({ email: 1 }, { unique: true });
 
 export const User = model<IUser, UserModel>('User', userSchema);

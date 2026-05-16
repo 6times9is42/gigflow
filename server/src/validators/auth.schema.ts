@@ -1,10 +1,11 @@
 import { z } from 'zod';
 
+// role is intentionally excluded — public registration always creates 'sales' users.
+// Admin accounts must be created via a separate privileged route or seeding.
 export const registerSchema = z.object({
   name: z.string().min(2).max(60),
   email: z.string().email(),
   password: z.string().min(8, 'Password must be at least 8 characters'),
-  role: z.enum(['admin', 'sales']).optional(),
 });
 
 export const loginSchema = z.object({
