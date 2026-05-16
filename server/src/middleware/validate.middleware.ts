@@ -3,7 +3,10 @@ import { ZodSchema } from 'zod';
 
 type Target = 'body' | 'query' | 'params';
 
-export function validate(schema: ZodSchema, target: Target = 'body') {
+export function validate(
+  schema: ZodSchema,
+  target: Target = 'body',
+): (req: Request, res: Response, next: NextFunction) => void {
   return (req: Request, _res: Response, next: NextFunction): void => {
     const result = schema.safeParse(req[target]);
     if (!result.success) {
