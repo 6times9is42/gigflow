@@ -156,7 +156,9 @@ See [API.md](API.md) for the full endpoint reference including request/response 
 
 ---
 
-## Test Users (after seeding)
+## Test Users
+
+The live demo at https://gigflow-smoky.vercel.app has been seeded with these accounts:
 
 | Role | Email | Password |
 |------|-------|----------|
@@ -164,6 +166,8 @@ See [API.md](API.md) for the full endpoint reference including request/response 
 | Sales | sales@gigflow.dev | Sales123! |
 
 The admin user can see and manage all leads. The sales user can only see and manage their own leads.
+
+> **No account?** You can also register a new account on the login page — all new accounts are created with the `sales` role.
 
 ---
 
