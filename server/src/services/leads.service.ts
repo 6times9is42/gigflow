@@ -108,28 +108,38 @@ export async function updateLead(
   input: UpdateLeadInput,
   requester: Requester,
 ): Promise<ILead> {
-  const existing = await Lead.findById(id);
-  if (!existing) throw new AppError(404, 'Lead not found', 'NOT_FOUND');
+  const ownerFilter =
+    requester.role === 'sales'
+      ? { _id: id, ownerId: new Types.ObjectId(requester.id) }
+      : { _id: id };
 
-  if (requester.role === 'sales' && existing.ownerId.toString() !== requester.id) {
-    throw new AppError(403, 'Access denied', 'FORBIDDEN');
+  const updated = await Lead.findOneAndUpdate(ownerFilter, { $set: input }, { new: true }).lean<ILead>();
+  if (!updated) {
+    const exists = await Lead.exists({ _id: id });
+    throw new AppError(
+      exists ? 403 : 404,
+      exists ? 'Access denied' : 'Lead not found',
+      exists ? 'FORBIDDEN' : 'NOT_FOUND',
+    );
   }
-
-  const updated = await Lead.findByIdAndUpdate(id, { $set: input }, { new: true }).lean<ILead>();
-  if (!updated) throw new AppError(404, 'Lead not found', 'NOT_FOUND');
-
   return updated;
 }
 
 export async function deleteLead(id: string, requester: Requester): Promise<void> {
-  const existing = await Lead.findById(id);
-  if (!existing) throw new AppError(404, 'Lead not found', 'NOT_FOUND');
+  const ownerFilter =
+    requester.role === 'sales'
+      ? { _id: id, ownerId: new Types.ObjectId(requester.id) }
+      : { _id: id };
 
-  if (requester.role === 'sales' && existing.ownerId.toString() !== requester.id) {
-    throw new AppError(403, 'Access denied', 'FORBIDDEN');
+  const deleted = await Lead.findOneAndDelete(ownerFilter);
+  if (!deleted) {
+    const exists = await Lead.exists({ _id: id });
+    throw new AppError(
+      exists ? 403 : 404,
+      exists ? 'Access denied' : 'Lead not found',
+      exists ? 'FORBIDDEN' : 'NOT_FOUND',
+    );
   }
-
-  await Lead.findByIdAndDelete(id);
 }
 
 export async function exportLeads(
