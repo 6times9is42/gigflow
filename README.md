@@ -139,6 +139,15 @@ cd server
 npm run seed
 ```
 
+### Running Tests
+
+```bash
+cd server
+npm test
+```
+
+Tests use an in-memory MongoDB (no Atlas connection required) and cover auth and leads CRUD with RBAC assertions.
+
 ---
 
 ## API Documentation
@@ -162,7 +171,7 @@ The admin user can see and manage all leads. The sales user can only see and man
 
 - **Refresh token rotation** — currently uses access-token-only auth (fine for this scope); httpOnly cookie + refresh token would be production-hardened
 - **WebSocket notifications** — real-time updates when a new lead is assigned to a sales user
-- **Jest + Supertest integration tests** — even 10–15 tests on auth + leads CRUD demonstrates test discipline; noted as explicit next step
+- **Expanded test coverage** — currently 20 integration tests covering auth and leads CRUD with RBAC; unit tests for service-layer helpers and a Postman collection would round this out
 - **Storybook** — documenting UI primitives in isolation would make the component library genuinely reusable
 - **Multi-origin CORS** — supporting multiple simultaneous deployment origins (e.g., preview deployments) without manual env editing
 - **Optimistic UI on status updates** — immediate feedback with rollback on API failure
