@@ -33,7 +33,7 @@ export function useLeads(params: LeadsQuery): UseLeadsResult {
 
     const parsedParams = JSON.parse(paramsKey) as LeadsQuery;
 
-    getLeadsApi(parsedParams)
+    getLeadsApi(parsedParams, controller.signal)
       .then((result) => {
         if (!controller.signal.aborted) {
           setData(result.data);

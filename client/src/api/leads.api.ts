@@ -21,9 +21,11 @@ export type UpdateLeadPayload = Partial<CreateLeadPayload>;
 
 export async function getLeadsApi(
   query: LeadsQuery = {},
+  signal?: AbortSignal,
 ): Promise<ApiListResponse<Lead>> {
   const { data } = await apiClient.get<ApiListResponse<Lead>>('/leads', {
     params: query,
+    signal,
   });
   return data;
 }
