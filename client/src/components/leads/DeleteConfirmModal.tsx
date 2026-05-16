@@ -4,6 +4,7 @@ import { Modal } from '@/components/ui/Modal';
 import { Button } from '@/components/ui/Button';
 import { deleteLeadApi } from '@/api/leads.api';
 import { extractApiError } from '@/api/client';
+import { useToast } from '@/components/feedback/Toast';
 import type { Lead } from '@/types/api';
 
 interface DeleteConfirmModalProps {
@@ -19,12 +20,14 @@ export function DeleteConfirmModal({
 }: DeleteConfirmModalProps): React.JSX.Element {
   const [isDeleting, setIsDeleting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const toast = useToast();
 
   const handleDelete = async (): Promise<void> => {
     setIsDeleting(true);
     setError(null);
     try {
       await deleteLeadApi(lead._id);
+      toast.success('Lead deleted successfully');
       onConfirm();
       onClose();
     } catch (err: unknown) {

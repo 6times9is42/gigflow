@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import { useDebounce } from '@/hooks/useDebounce';
@@ -44,6 +44,23 @@ export default function LeadsListPage(): React.JSX.Element {
   const { data: leads, pagination, isLoading, error, refetch } = useLeads(query);
 
   const hasActiveFilters = Boolean(search || status || source);
+
+  // Keyboard shortcut: "n" opens Add Lead modal
+  useEffect(() => {
+    const handler = (e: KeyboardEvent): void => {
+      if (
+        e.key === 'n' &&
+        !e.ctrlKey && !e.metaKey && !e.altKey &&
+        document.activeElement?.tagName !== 'INPUT' &&
+        document.activeElement?.tagName !== 'TEXTAREA' &&
+        document.activeElement?.tagName !== 'SELECT'
+      ) {
+        setShowAddModal(true);
+      }
+    };
+    document.addEventListener('keydown', handler);
+    return () => document.removeEventListener('keydown', handler);
+  }, []);
 
   // Navigate to detail page
   const handleNavigate = (lead: Lead): void => {

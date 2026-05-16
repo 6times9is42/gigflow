@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/Button';
 import { FormSelect } from './FormSelect';
 import { createLeadApi, updateLeadApi } from '@/api/leads.api';
 import { extractApiError } from '@/api/client';
+import { useToast } from '@/components/feedback/Toast';
 import {
   createLeadSchema,
   updateLeadSchema,
@@ -28,6 +29,7 @@ interface LeadFormProps {
 export function LeadForm({ lead, onSuccess, onClose }: LeadFormProps): React.JSX.Element {
   const isEdit = lead !== undefined;
   const [apiError, setApiError] = useState<string | null>(null);
+  const toast = useToast();
 
   // Use appropriate schema based on mode
   const {
@@ -59,8 +61,10 @@ export function LeadForm({ lead, onSuccess, onClose }: LeadFormProps): React.JSX
     try {
       if (isEdit && lead) {
         await updateLeadApi(lead._id, data);
+        toast.success('Lead updated successfully');
       } else {
         await createLeadApi(data as CreateLeadInput);
+        toast.success('Lead created successfully');
       }
       onSuccess();
       onClose();

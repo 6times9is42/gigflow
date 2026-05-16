@@ -1,4 +1,4 @@
-import { Moon, Sun, LogOut, Users } from 'lucide-react';
+import { Moon, Sun, LogOut, Users, Menu } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import { cn } from '@/lib/utils';
@@ -36,7 +36,11 @@ function getPageIcon(pathname: string): React.ReactNode {
   return null;
 }
 
-export default function Topbar(): React.JSX.Element {
+interface TopbarProps {
+  onMobileMenuToggle: () => void;
+}
+
+export default function Topbar({ onMobileMenuToggle }: TopbarProps): React.JSX.Element {
   const { user, logout } = useAuth();
   const location = useLocation();
   const [isDark, toggleDark] = useDarkMode();
@@ -45,7 +49,23 @@ export default function Topbar(): React.JSX.Element {
   const icon = getPageIcon(location.pathname);
 
   return (
-    <header className="h-14 shrink-0 flex items-center gap-4 px-5 bg-white dark:bg-obsidian-900 border-b border-stone-200 dark:border-obsidian-700">
+    <header className="h-14 shrink-0 flex items-center gap-3 px-4 md:px-5 bg-white dark:bg-obsidian-900 border-b border-stone-200 dark:border-obsidian-700">
+      {/* Hamburger — mobile only */}
+      <button
+        type="button"
+        className={cn(
+          'md:hidden p-1.5 rounded-lg transition-all duration-200',
+          'text-stone-500 dark:text-obsidian-400',
+          'hover:bg-stone-100 dark:hover:bg-obsidian-750',
+          'hover:text-stone-800 dark:hover:text-obsidian-100',
+          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500/50',
+        )}
+        onClick={onMobileMenuToggle}
+        aria-label="Toggle navigation"
+      >
+        <Menu size={18} />
+      </button>
+
       {/* Page title */}
       <div className="flex items-center gap-2 flex-1 min-w-0">
         {icon && (
