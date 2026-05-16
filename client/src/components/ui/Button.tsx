@@ -13,20 +13,11 @@ const variantClasses: Record<NonNullable<ButtonProps['variant']>, string> = {
   primary:
     'bg-amber-500 text-obsidian-900 font-semibold hover:bg-amber-400 active:bg-amber-600 shadow-sm hover:shadow-amber-glow',
   secondary:
-    'bg-obsidian-700 text-obsidian-100 border border-obsidian-600 hover:bg-obsidian-600 hover:border-obsidian-500 dark:bg-obsidian-700 dark:text-obsidian-100 dark:border-obsidian-600 dark:hover:bg-obsidian-600',
+    'bg-stone-100 text-stone-800 border border-stone-300 hover:bg-stone-200 dark:bg-obsidian-700 dark:text-obsidian-100 dark:border-obsidian-600 dark:hover:bg-obsidian-600 dark:hover:border-obsidian-500',
   danger:
-    'bg-red-500/10 text-red-400 border border-red-500/30 hover:bg-red-500/20 hover:border-red-500/50',
+    'bg-red-50 text-red-600 border border-red-300 hover:bg-red-100 dark:bg-red-500/[0.1] dark:text-red-400 dark:border-red-500/30 dark:hover:bg-red-500/20 dark:hover:border-red-500/50',
   ghost:
-    'bg-transparent text-obsidian-300 hover:bg-obsidian-700/50 hover:text-obsidian-100 dark:text-obsidian-300 dark:hover:bg-obsidian-700/50',
-};
-
-// Light mode overrides for secondary/ghost
-const variantClassesLight: Record<NonNullable<ButtonProps['variant']>, string> = {
-  primary: '',
-  secondary:
-    'light:bg-stone-100 light:text-stone-800 light:border-stone-300 light:hover:bg-stone-200',
-  danger: '',
-  ghost: 'light:text-stone-600 light:hover:bg-stone-100 light:hover:text-stone-900',
+    'bg-transparent text-stone-600 hover:bg-stone-100 hover:text-stone-900 dark:text-obsidian-300 dark:hover:bg-obsidian-700/50 dark:hover:text-obsidian-100',
 };
 
 const sizeClasses: Record<NonNullable<ButtonProps['size']>, string> = {
@@ -53,7 +44,6 @@ export function Button({
         'disabled:pointer-events-none disabled:opacity-40',
         'select-none cursor-pointer',
         variantClasses[variant],
-        variantClassesLight[variant],
         sizeClasses[size],
         className,
       )}

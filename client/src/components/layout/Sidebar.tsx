@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { Users, BarChart3, Shield } from 'lucide-react';
+import { Users, Shield } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { cn } from '@/lib/utils';
 
@@ -14,11 +14,6 @@ const navItems: NavItem[] = [
     to: '/leads',
     label: 'Leads',
     icon: <Users size={17} />,
-  },
-  {
-    to: '/analytics',
-    label: 'Analytics',
-    icon: <BarChart3 size={17} />,
   },
 ];
 

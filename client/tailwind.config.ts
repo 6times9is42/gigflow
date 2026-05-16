@@ -13,6 +13,7 @@ const config: Config = {
       colors: {
         // Obsidian palette
         obsidian: {
+          50: '#f0f0f8',
           950: '#0a0a0f',
           900: '#0f0f18',
           850: '#13131e',

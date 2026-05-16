@@ -1,8 +1,8 @@
-import { Moon, Sun, LogOut, Users, Menu } from 'lucide-react';
+import { Moon, Sun, LogOut, Users } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import { cn } from '@/lib/utils';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 function useDarkMode(): [boolean, () => void] {
   const [isDark, setIsDark] = useState<boolean>(() =>
@@ -40,28 +40,12 @@ export default function Topbar(): React.JSX.Element {
   const { user, logout } = useAuth();
   const location = useLocation();
   const [isDark, toggleDark] = useDarkMode();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const title = getPageTitle(location.pathname);
   const icon = getPageIcon(location.pathname);
 
-  // Close mobile menu on nav
-  useEffect(() => {
-    setMobileMenuOpen(false);
-  }, [location.pathname]);
-
   return (
     <header className="h-14 shrink-0 flex items-center gap-4 px-5 bg-white dark:bg-obsidian-900 border-b border-stone-200 dark:border-obsidian-700">
-      {/* Mobile menu toggle */}
-      <button
-        type="button"
-        className="md:hidden p-1.5 rounded-lg text-stone-500 dark:text-obsidian-400 hover:bg-stone-100 dark:hover:bg-obsidian-750 transition-colors"
-        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        aria-label="Toggle menu"
-      >
-        <Menu size={18} />
-      </button>
-
       {/* Page title */}
       <div className="flex items-center gap-2 flex-1 min-w-0">
         {icon && (
