@@ -6,8 +6,8 @@ A production-grade MERN Lead Management Dashboard built for a Full Stack Interns
 
 ## Live Demo
 
-- **Frontend:** _Coming soon — deploying to Vercel_
-- **Backend API:** _Coming soon — deploying to Render_
+- **Frontend:** https://gigflow-smoky.vercel.app
+- **Backend API:** https://gigflow-ve7z.onrender.com
 - **Database:** MongoDB Atlas (free tier)
 
 ---
@@ -46,7 +46,7 @@ A production-grade MERN Lead Management Dashboard built for a Full Stack Interns
 
 ## Screenshots
 
-> _Screenshots will be added after deployment. Key views: leads table, dark mode, filter panel, mobile card layout._
+> _Visit the [live demo](https://gigflow-smoky.vercel.app) to see the app. Key views: leads table with filters and pagination, dark mode, mobile card layout, lead create/edit modal._
 
 ---
 
